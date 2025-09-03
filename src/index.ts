@@ -78,7 +78,7 @@ async function handleChatRequest(
     const response = await env.AI.run(
       data.model || MODEL_ID,
       {
-        data...,
+        ...data,
         messages,
         max_tokens: 8112,
       },
