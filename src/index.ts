@@ -58,7 +58,8 @@ async function handleChatRequest(
 ): Promise<Response> {
   try {
     // Parse JSON request body
-    const { messages = [] } = (await request.json()) as {
+    const data = await request.json();
+    const { messages = [] } = (data) as {
       messages: ChatMessage[];
     };
 
@@ -70,8 +71,9 @@ async function handleChatRequest(
     const response = await env.AI.run(
       MODEL_ID,
       {
+        data...,
         messages,
-        max_tokens: 1024,
+        max_tokens: 8112,
       },
       {
         returnRawResponse: true,
