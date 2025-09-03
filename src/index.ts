@@ -44,6 +44,13 @@ export default {
       return new Response("Method not allowed", { status: 405 });
     }
 
+    if (url.pathname === "/api/models") {
+      const response = await env.AI.models.list(
+        url.searchParams, { returnRawResponse: true}
+      );
+      return response;
+    }
+
     // Handle 404 for unmatched routes
     return new Response("Not found", { status: 404 });
   },
@@ -69,7 +76,7 @@ async function handleChatRequest(
     }
 
     const response = await env.AI.run(
-      MODEL_ID,
+      data.model || MODEL_ID,
       {
         data...,
         messages,
