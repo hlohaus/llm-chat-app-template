@@ -45,9 +45,7 @@ export default {
     }
 
     if (url.pathname === "/api/models") {
-      const data = await env.AI.models.list(
-        url.searchParams.entries()
-      );
+      const data = await env.AI.models.list();
       return Response.json(data);;
     }
 
