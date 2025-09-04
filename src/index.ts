@@ -45,10 +45,10 @@ export default {
     }
 
     if (url.pathname === "/api/models") {
-      const response = await env.AI.models.list(
-        url.searchParams, { returnRawResponse: true}
+      const data = await env.AI.models.list(
+        url.searchParams.entries()
       );
-      return response;
+      return Response.json(data);;
     }
 
     // Handle 404 for unmatched routes
